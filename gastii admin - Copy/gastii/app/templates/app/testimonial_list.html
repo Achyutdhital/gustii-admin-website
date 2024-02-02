@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'testimonial-list' %}">Testimonials</a></li>
+                                    <li class="breadcrumb-item active">List</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Testimonials</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="add_button" style="text-align: right;">
+                    <a href="{% url 'testimonial-add' %}" class="btn btn-success btn-circle btn-lg">
+                        Add Testimonials <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="header-title">List of Testimonials</h4>
+                    <div class="table-responsive">
+                        <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for testimonial in testimonials %}
+                                <tr>
+                                    <td>{{ testimonial.name }}</td>
+                                    <td>{{ testimonial.discriptions }}</td>
+                                    <td><img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" width="50"></td>
+                                    <td class="table-action">
+                                        <a href="{% url 'testimonial-edit' testimonial.id %}" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
+                                        <a href="{% url 'testimonial-delete' testimonial.id %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

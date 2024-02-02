@@ -1,0 +1,74 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- Add your CSS links here if needed -->
+{% endblock %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'banner-detail' pk=1 %}">Banner details</a></li>
+                                    <li class="breadcrumb-item active">Edit ({{ banner_image.title }})</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Edit Banner</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post"  class="custom-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.non_field_errors }}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+                                    <input type="text" id="{{ form.title.id_for_label }}" class="form-control" name="{{ form.title.name }}" value="{{ form.title.value }}">
+                                    {{ form.title.errors }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="example-textarea" class="form-label">Short Description:</label>
+                                    <textarea class="form-control" id="example-textarea" name="{{ form.short_discriptions.name }}" rows="5">{{ form.short_discriptions.value }}</textarea>
+                                    {{ form.short_discriptions.errors }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">    
+                                <div class="mb-3">
+                                    <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
+                                    <input type="file" id="{{ form.image.id_for_label }}" class="form-control" name="{{ form.image.name }}">
+                                    {{ form.image.errors }}
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Current image</label>
+                                    {% if form.instance.image %}
+                                        <img src="{{ form.instance.image.url }}" style="max-height: 200px; max-width: 200px;" alt="Current image" class="current-image">
+                                    {% else %}
+                                        <p>No image available</p>
+                                    {% endif %}
+                                </div><br>
+                            </div>
+                        </div>
+                                
+                        
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

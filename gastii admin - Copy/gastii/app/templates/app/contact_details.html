@@ -1,0 +1,73 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item active"><a href="{% url 'contact-detail' pk=1 %}">Contact details</a></li>
+                                    <li class="breadcrumb-item active">Edit</li>
+
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Contact Details</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="text-align: right;">
+                    <a href="{% url 'contact-edit' pk=1 %}">
+                    <button class="btn btn-primary" style="text-align: right;">
+                    <i class="ri-edit-line"> Edit Contact</i></button></a>
+                </div>
+                <div class="card-body">
+                    <h4 class="header-title">Contact Details</h4>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Location</th>
+                                <td>{{ contact_details.location }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phone Number</th>
+                                <td>{{ contact_details.phoneNo }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td>{{ contact_details.email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Facebook URL</th>
+                                <td>{{ contact_details.facebookUrl }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Instagram URL</th>
+                                <td>{{ contact_details.instagramUrl }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">YouTube URL</th>
+                                <td>{{ contact_details.youtubeUrl }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Twitter URL</th>
+                                <td>{{ contact_details.twiterUrl }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Opening Hours</th>
+                                <td>{{ contact_details.openingHours }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item "><a href="{% url 'customer-query-list' %}">Queries</a></li>
+                                    <li class="breadcrumb-item active">List</li>
+
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Customer Queries</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Customer Query List</h4>
+                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Subject</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for query in customer_queries %}
+                            <tr>
+                                <td>{{ query.fullname }}</td>
+                                <td>{{ query.subject }}</td>
+                                <td>{{ query.email }}</td>
+                                <td>
+                                    <a href="{% url 'customer-query-detail' query.id %}" class="btn btn-primary" style="color: aliceblue;">Detail</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

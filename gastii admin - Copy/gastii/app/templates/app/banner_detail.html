@@ -1,0 +1,75 @@
+{% extends 'app/base.html' %}
+        {%load static %}
+        {% block content %}
+            <div class="content-page">
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="{% url 'banner-detail' pk=1 %}">Banner details</a></li>
+                                            <li class="breadcrumb-item active">{{ banner_image.title }}</li>
+                                           
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Banner Details</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div style="text-align: right;">
+                            <a href="{% url 'banner-edit' pk=1 %}">
+                            <button class="btn btn-primary" style="text-align: right;">
+                            <i class="ri-edit-line"> Edit Banner</i></button></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    
+                                    <a href="javascript: void(0);" class="text-center d-block mb-4">
+                                        <img src="{{ form.instance.image.url }}" class="img-fluid" style="max-width: 280px;" alt="Banner Image">
+                                    </a>
+                                </div> 
+                        
+                                <div class="col-lg-7">
+                                    <form method="post" enctype="multipart/form-data" class="ps-lg-4">
+                                        {% csrf_token %}
+                                        
+                                        <div class="mt-0">
+                                        <h3 class="mt-0">Title:</h3>
+                                        <h4 class="mt-0">{{ form.instance.title }}</h4>
+                                        <div>
+                        
+                                        <div class="mt-4">
+                                            <h6 class="font-14">Short Description:</h6>
+                                            <p>{{ form.instance.short_discriptions }}</p>
+                                        </div>
+                                    </form>
+                                </div> 
+                            </div> 
+                        
+                            <div class="table-responsive mt-4">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- content -->
+
+                
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END wrapper -->
+        {% endblock %}
+       

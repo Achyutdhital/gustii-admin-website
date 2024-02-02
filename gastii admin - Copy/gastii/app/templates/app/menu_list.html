@@ -1,0 +1,67 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'menu-list'%}">Menu</a></li>
+                                    <li class="breadcrumb-item active">List</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Menu</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="add_button" style="text-align: right;">
+                                <a href="{% url 'menu-add' %}" class="btn btn-success btn-circle btn-lg">
+                                    Add Menu <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Category</th>
+                                            <th>Image</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for menu in menus %}
+                                            <tr>
+                                                <td class="table-user">
+                                                    {{ menu.name }}
+                                                </td>
+                                               <td>{{ menu.price }}</td>
+                                                <td>{{ menu.categori }}</td>
+                                                <td><img src="{{ menu.image.url }}" alt="{{ menu.categori_name }}" width="50"></td>
+                                                <td class="table-action">
+                                                    <a href="{% url 'menu-edit' menu.item_slug %}" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
+                                                    <a href="{% url 'menu-delete' menu.item_slug %}" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- Add your CSS links here if needed -->
+{% endblock %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'contact-detail' pk=1 %}">Contact details</a></li>
+                                    <li class="breadcrumb-item active">Edit Contact Details</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Edit Contact Details</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" class="custom-form">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.location.id_for_label }}" class="form-label">Location</label>
+                                    <input type="text" id="{{ form.location.id_for_label }}" class="form-control" name="{{ form.location.name }}" value="{{ form.location.value }}">
+                                    {{ form.location.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.phoneNo.id_for_label }}" class="form-label">Phone Number</label>
+                                    <input type="number" id="{{ form.phoneNo.id_for_label }}" class="form-control" name="{{ form.phoneNo.name }}" value="{{ form.phoneNo.value }}">
+                                    {{ form.phoneNo.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                                    <input type="email" id="{{ form.email.id_for_label }}" class="form-control" name="{{ form.email.name }}" value="{{ form.email.value }}">
+                                    {{ form.email.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.facebookUrl.id_for_label }}" class="form-label">Facebook URL</label>
+                                    <input type="url" id="{{ form.facebookUrl.id_for_label }}" class="form-control" name="{{ form.facebookUrl.name }}" value="{{ form.facebookUrl.value }}">
+                                    {{ form.facebookUrl.errors }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.instagramUrl.id_for_label }}" class="form-label">Instagram URL</label>
+                                    <input type="url" id="{{ form.instagramUrl.id_for_label }}" class="form-control" name="{{ form.instagramUrl.name }}" value="{{ form.instagramUrl.value }}">
+                                    {{ form.instagramUrl.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.youtubeUrl.id_for_label }}" class="form-label">YouTube URL</label>
+                                    <input type="url" id="{{ form.youtubeUrl.id_for_label }}" class="form-control" name="{{ form.youtubeUrl.name }}" value="{{ form.youtubeUrl.value }}">
+                                    {{ form.youtubeUrl.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.twiterUrl.id_for_label }}" class="form-label">Twitter URL</label>
+                                    <input type="url" id="{{ form.twiterUrl.id_for_label }}" class="form-control" name="{{ form.twiterUrl.name }}" value="{{ form.twiterUrl.value }}">
+                                    {{ form.twiterUrl.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.openingHours.id_for_label }}" class="form-label">Opening Hours</label>
+                                    <textarea id="{{ form.openingHours.id_for_label }}" class="form-control" name="{{ form.openingHours.name }}" rows="3">{{ form.openingHours.value }}</textarea>
+                                    {{ form.openingHours.errors }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

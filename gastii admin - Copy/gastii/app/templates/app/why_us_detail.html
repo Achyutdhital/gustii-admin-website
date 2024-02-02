@@ -1,0 +1,46 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{%url 'why_us-detail' pk=1%}">Why choose us?</a></li>
+                                    <li class="breadcrumb-item active">{{ why_us.videoTitle }}</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">{{ why_us.videoTitle }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="text-align: right;">
+                    <a href="{% url 'why_us-edit' pk=why_us.pk %}">
+                        <button class="btn btn-primary" style="text-align: right;">
+                            <i class="ri-edit-line"> Edit</i>
+                        </button>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="header-title">Video Details</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Video Title:</label>
+                        <p>{{ why_us.videoTitle }}</p>
+                    </div><br>
+                    
+                    <label class="form-label">Video:</label>
+                    <div class="mb-3">
+                        <iframe width="560" height="315" src="{{ why_us.videoUrl }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

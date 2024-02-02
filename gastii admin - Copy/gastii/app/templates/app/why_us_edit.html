@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{%url 'why_us-detail' pk=1%}">Why choose us?</a></li>
+                                    <li class="breadcrumb-item active">Edit</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Edit Why Choose Us</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" class="custom-form">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.non_field_errors }}
+                        
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.videoTitle.id_for_label }}" class="form-label">Video Title:</label>
+                            <input type="text" id="{{ form.videoTitle.id_for_label }}" class="form-control" name="{{ form.videoTitle.name }}" value="{{ form.videoTitle.value }}">
+                            {{ form.videoTitle.errors }}
+                        </div>
+                      
+                        <div class="mb-3">
+                            <label for="{{ form.videoUrl.id_for_label }}" class="form-label">Video Title:</label>
+                            <input type="text" id="{{ form.videoUrl.id_for_label }}" class="form-control" name="{{ form.videoUrl.name }}" value="{{ form.videoUrl.value }}">
+                            {{ form.videoUrl.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

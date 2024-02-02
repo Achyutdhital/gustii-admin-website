@@ -1,0 +1,93 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- Add your CSS links here if needed -->
+{% endblock %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'menu-list'%}">Menu</a></li>
+                                    <li class="breadcrumb-item active">{% if form.instance.id %}Edit{% else %}Add{% endif %} Menu</li>
+
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Edit Menu</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" class="custom-form">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.non_field_errors }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" id="{{ form.name.id_for_label }}" class="form-control" name="{{ form.name.name }}" value="{% if form.instance.id %}{{ form.name.value }}{% endif %}">
+                                    {{ form.name.errors }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.categori.id_for_label }}" class="form-label">Category</label>
+                                    <select id="{{ form.categori.id_for_label }}" class="form-select" name="{{ form.categori.name }}">
+                                        {% for category in form.categori.field.queryset %}
+                                        <option value="{{ category.pk }}" {% if category.pk == form.categori.value %}selected{% endif %}>
+                                            {{ category.categori_name }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                    {{ form.categori.errors }}
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="{{ form.price.id_for_label }}" class="form-label">Price</label>
+                                    <input type="number" id="{{ form.price.id_for_label }}" class="form-control" name="{{ form.price.name }}" value="{{ form.price.value }}">
+                                    {{ form.price.errors }}
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">                            
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
+                                    <input type="file" id="{{ form.image.id_for_label }}" class="form-control" name="{{ form.image.name }}">
+                                    {{ form.image.errors }}
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Current image</label>
+                                    {% if form.instance.image %}
+                                        <img src="{{ form.instance.image.url }}" style="max-height: 200px; max-width: 200px;" alt="Current image" class="current-image">
+                                    {% else %}
+                                        <p>No image available</p>
+                                    {% endif %}
+                                </div>
+                            </div><br>
+                            <div class="mb-3">
+                                <label for="{{ form.short_discriptions.id_for_label }}" class="form-label">Short Description:</label>
+                                <div class="form-group">
+                                    {{ form.short_discriptions }}
+                                    {{ form.short_discriptions.errors }}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

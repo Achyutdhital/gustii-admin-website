@@ -1,0 +1,38 @@
+<!-- testimonial_confirm_delete.html -->
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'testimonial-list' %}">Testimonials</a></li>
+                                    <li class="breadcrumb-item active">Delete Testimonial</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Delete Testimonial</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <p>Are you sure you want to delete the testimonial "{{ testimonial.name }}"?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a href="{% url 'testimonial-list' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

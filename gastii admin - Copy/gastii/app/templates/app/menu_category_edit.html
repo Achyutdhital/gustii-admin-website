@@ -1,0 +1,86 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'menu-category-list'%}">Menu category</a></li>
+                                <li class="breadcrumb-item active">{% if form.instance.id %}Edit{% else %}Add{% endif %} Menu category </li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Edit Menu Category</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" class="custom-form">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.non_field_errors }}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.categori_name.id_for_label }}" class="form-label">Service Name</label>
+                                <input type="text" id="{{ form.categori_name.id_for_label }}" class="form-control" name="{{ form.categori_name.name }}" value="{% if form.instance.id %}{{ form.categori_name.value }}{% endif %}">
+                                {{ form.categori_name.errors }}
+                            </div>
+                            
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.tags.id_for_label }}" class="form-label">Tags</label>
+                                <input type="text" id="{{ form.tags.id_for_label }}" class="form-control" name="{{ form.tags.name }}" value="{{ form.tags.value }}">
+                                {{ form.tags.errors }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.icon.id_for_label }}" class="form-label">Icon</label>
+                                <input type="file" id="{{ form.icon.id_for_label }}" class="form-control" name="{{ form.icon.name }}">
+                                {{ form.icon.errors }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Current Icon</label>
+                                {% if form.instance.icon %}
+                                    <img src="{{ form.instance.icon.url }}" style="max-height: 200px; max-width: 200px;" alt="Current Icon" class="current-icon">
+                                {% else %}
+                                    <p>No icon available</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var currentIcon = document.querySelector(".current-icon");
+    var iconField = document.querySelector("input[name='icon']");
+    
+    iconField.addEventListener("change", function() {
+        var file = iconField.files[0];
+        var objectURL = URL.createObjectURL(file);
+        currentIcon.src = objectURL;
+    });
+});
+</script>
+
+{% endblock %}
